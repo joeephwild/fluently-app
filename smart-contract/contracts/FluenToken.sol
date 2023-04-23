@@ -4,13 +4,16 @@ pragma solidity ^0.8.9;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 /**
  * @title FLUENTOKEN
  * @dev The FLUENTOKEN ERC20 token contract.
  */
 contract FLUENTOKEN is ERC20, Pausable, Ownable {
-    uint256 private constant MAX_RECIPIENTS = 100; // Maximum number of recipients in a single distribution
+    using SafeMath for uint256;
+
+    uint256 public constant MAX_RECIPIENTS = 1000;  // Maximum number of recipients in a single distribution
 
     /**
      * @dev Initializes the FLUENTOKEN contract and mints initial tokens to the contract itself.
