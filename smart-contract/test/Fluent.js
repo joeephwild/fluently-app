@@ -4,7 +4,7 @@ const { ethers } = require("hardhat");
 describe("FLUENTOKEN", function () {
   let token;
 
-  //Deploy contract before running the test 
+  //Deploy contract before running the test
   beforeEach(async () => {
     const FLUENTOKEN = await ethers.getContractFactory("FLUENTOKEN");
     token = await FLUENTOKEN.deploy();
