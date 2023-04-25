@@ -27,6 +27,11 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         return _baseTokenURI;
     }
 
+    enum MatchStatus {
+        pending,
+        matched
+    }
+
     /// @dev Struct to store the user's required data.
     struct Account {
         string imageUri;
@@ -39,7 +44,7 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         address user;
         string language;
         string nativeLanguage;
-        string matchStatus;
+        MatchStatus matchStatus;
         uint256 matchId;
         uint256 time;
     }
@@ -70,6 +75,9 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         allUsers.push(profile);
     }
 
+    mapping(string => mapping(uint256 => Meeting[]))
+        private meetingsByLanguageAndTime;
+
     function createMeeting(
         string memory _language,
         string memory _nativeLanguage,
@@ -79,36 +87,37 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
             user: msg.sender,
             language: _language,
             nativeLanguage: _nativeLanguage,
-            matchStatus: "pending",
+            matchStatus: pending,
             matchId: 0,
             time: _time
         });
-        allMeetings.push(newMeeting);
+        meetingsByLanguageAndTime[_language][_time].push(newMeeting);
+    }
 
-        for (uint256 i = 0; i < allMeetings.length; i++) {
-            Meeting storage otherMeeting = allMeetings[i];
-
-            // Skip over the same meeting and meetings that are already matched
-            if (
-                newMeeting.time != otherMeeting.time ||
-                newMeeting.matchStatus == "matched" ||
-                otherMeeting.matchStatus == "matched" ||
-                newMeeting.user == otherMeeting.user
-            ) {
+    function matchUsers(string memory _language, uint256 _time) external {
+        Meeting[] storage meetings = meetingsByLanguageAndTime[_language][
+            _time
+        ];
+        for (uint256 i = 0; i < meetings.length; i++) {
+            Meeting storage meeting1 = meetings[i];
+            if (meeting1.matchStatus == matched) {
                 continue;
             }
-
-            // If the two users have a common language, create a match
-            if (
-                newMeeting.nativeLanguage == otherMeeting.language &&
-                newMeeting.language == otherMeeting.nativeLanguage
-            ) {
-                // Assign the two meetings a common matchId and update their match status
-                newMeeting.matchId = allMeetings.length;
-                otherMeeting.matchId = allMeetings.length;
-                newMeeting.matchStatus = "matched";
-                otherMeeting.matchStatus = "matched";
-                break;
+            for (uint256 j = i + 1; j < meetings.length; j++) {
+                Meeting storage meeting2 = meetings[j];
+                if ((meeting2.matchStatus) == matched) {
+                    continue;
+                }
+                if (
+                    (meeting1.nativeLanguage) == (meeting2.language) &&
+                    (meeting2.nativeLanguage) == (meeting1.language)
+                ) {
+                    meeting1.matchStatus = matched;
+                    meeting1.matchId = i + 1;
+                    meeting2.matchStatus = matched;
+                    meeting2.matchId = i + 1;
+                    break;
+                }
             }
         }
     }
