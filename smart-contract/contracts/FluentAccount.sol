@@ -47,6 +47,7 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         MatchStatus matchStatus;
         uint256 matchId;
         uint256 time;
+        string meetingLink;
     }
 
     Meeting[] private allMeetings;
@@ -87,39 +88,61 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
             user: msg.sender,
             language: _language,
             nativeLanguage: _nativeLanguage,
-            matchStatus: pending,
+            matchStatus: MatchStatus.pending,
             matchId: 0,
             time: _time
         });
         meetingsByLanguageAndTime[_language][_time].push(newMeeting);
     }
 
-    function matchUsers(string memory _language, uint256 _time) external {
+    function matchUsers(
+        string memory _language,
+        uint256 _time,
+        string memory _meetingLink
+    ) external {
         Meeting[] storage meetings = meetingsByLanguageAndTime[_language][
             _time
         ];
         for (uint256 i = 0; i < meetings.length; i++) {
             Meeting storage meeting1 = meetings[i];
-            if (meeting1.matchStatus == matched) {
+            if (meeting1.matchStatus == MatchStatus.matched) {
                 continue;
             }
             for (uint256 j = i + 1; j < meetings.length; j++) {
                 Meeting storage meeting2 = meetings[j];
-                if ((meeting2.matchStatus) == matched) {
+                if ((meeting2.matchStatus) == MatchStatus.matched) {
                     continue;
                 }
                 if (
                     (meeting1.nativeLanguage) == (meeting2.language) &&
                     (meeting2.nativeLanguage) == (meeting1.language)
                 ) {
-                    meeting1.matchStatus = matched;
+                    meeting1.matchStatus = MatchStatus.matched;
                     meeting1.matchId = i + 1;
-                    meeting2.matchStatus = matched;
+                    meeting1.meetingLink = _meetingLink;
+                    meeting2.matchStatus = MatchStatus.matched;
                     meeting2.matchId = i + 1;
+                    meeting1.meetingLink = _meetingLink;
                     break;
                 }
             }
         }
+    }
+
+    function getMatchedMeeting(
+        address _user
+    ) external view returns (Meeting memory) {
+        Meeting[] storage allMeetings = allMeetingsByUser[_user];
+        for (uint i = 0; i < allMeetings.length; i++) {
+            Meeting memory meeting = allMeetings[i];
+            if (
+                meeting.matchStatus == MatchStatus.matched &&
+                meeting.user == _user
+            ) {
+                return meeting;
+            }
+        }
+        revert("User has not been matched");
     }
 
     /// @dev Gets all the created accounts.
