@@ -133,14 +133,17 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         newMeeting.time = _time;
         allMeetings.push(newMeeting);
     }
-
+    
+    /// @param a represent the first string to be compared to the second string
+    /// @param b represent the second string to be compared to the first string
     function compareStrings(
         string storage a,
         string storage b
     ) internal pure returns (bool) {
         return keccak256(abi.encodePacked(a)) == keccak256(abi.encodePacked(b));
     }
-
+ 
+   //A function to match users from the meeting struct
     function matchUsers(
         string memory _language,
         uint256 _time,
