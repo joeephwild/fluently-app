@@ -35,6 +35,16 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         string nativeLanguage;
     }
 
+    struct Meeting {
+        address user;
+        string language;
+        string nativeLanguage;
+        string matchStatus;
+        uint256 matchId;
+        uint256 time;
+    }
+
+    Meeting[] private allMeetings;
     Account[] private allUsers;
     mapping(address => Account) private userProfiles;
 
@@ -58,6 +68,49 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         _mint(msg.sender, tokenId);
         _tokenIdCounter.increment();
         allUsers.push(profile);
+    }
+
+    function createMeeting(
+        string memory _language,
+        string memory _nativeLanguage,
+        uint256 _time
+    ) external {
+        Meeting memory newMeeting = Meeting({
+            user: msg.sender,
+            language: _language,
+            nativeLanguage: _nativeLanguage,
+            matchStatus: "pending",
+            matchId: 0,
+            time: _time
+        });
+        allMeetings.push(newMeeting);
+
+        for (uint256 i = 0; i < allMeetings.length; i++) {
+            Meeting storage otherMeeting = allMeetings[i];
+
+            // Skip over the same meeting and meetings that are already matched
+            if (
+                newMeeting.time != otherMeeting.time ||
+                newMeeting.matchStatus == "matched" ||
+                otherMeeting.matchStatus == "matched" ||
+                newMeeting.user == otherMeeting.user
+            ) {
+                continue;
+            }
+
+            // If the two users have a common language, create a match
+            if (
+                newMeeting.nativeLanguage == otherMeeting.language &&
+                newMeeting.language == otherMeeting.nativeLanguage
+            ) {
+                // Assign the two meetings a common matchId and update their match status
+                newMeeting.matchId = allMeetings.length;
+                otherMeeting.matchId = allMeetings.length;
+                newMeeting.matchStatus = "matched";
+                otherMeeting.matchStatus = "matched";
+                break;
+            }
+        }
     }
 
     /// @dev Gets all the created accounts.
