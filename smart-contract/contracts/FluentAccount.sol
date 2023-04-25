@@ -6,10 +6,15 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 /// @title FluentAccount
 /// @author Joseph Omotade
 /// @notice A contract for creating and managing user accounts for the Fluent platform.
+
+interface FluentToken {
+    function distributeToken(address[] calldata recipients) external;
+}
 
 contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
@@ -17,6 +22,17 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     Counters.Counter private _tokenIdCounter;
 
     string private _baseTokenURI;
+    uint8 rating;
+    address[] users;
+
+    function distributeToken(address[] calldata recipients, address _contracts) public {
+       IERC20 token = IERC20(_contracts);
+       uint256 amount = 100000000000000000;
+        for (uint i = 0; i < recipients.length; i++) {
+            require(recipients[i] != address(0), "Recipient address cannot be zero");
+            token.transfer(recipients[i], amount);
+        }
+    }
 
     constructor(string memory baseTokenURI) ERC721("FluentToken", "FTK") {
         _baseTokenURI = baseTokenURI;
@@ -33,6 +49,14 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         string language;
         string fullName;
         string nativeLanguage;
+        uint256 userId;
+    }
+
+    struct CallSchema {
+        uint256 time;
+        string language;
+        address user;
+        bool matched;
     }
 
     Account[] private allUsers;
@@ -49,15 +73,30 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         string memory _fullName,
         string memory _nativeLanguage
     ) external {
+        uint256 tokenId = _tokenIdCounter.current();
         Account storage profile = userProfiles[msg.sender];
         profile.fullName = _fullName;
         profile.imageUri = _imageUri;
         profile.language = _language;
         profile.nativeLanguage = _nativeLanguage;
-        uint256 tokenId = _tokenIdCounter.current();
+        profile.userId = tokenId;
         _mint(msg.sender, tokenId);
         _tokenIdCounter.increment();
+        users.push(msg.sender);
         allUsers.push(profile);
+    }
+
+    function updateAccount(
+        string memory _imageUri,
+        string memory _language,
+        string memory _fullName,
+        string memory _nativeLanguage
+    ) external {
+        Account storage profile = userProfiles[msg.sender];
+        profile.fullName = _fullName;
+        profile.imageUri = _imageUri;
+        profile.language = _language;
+        profile.nativeLanguage = _nativeLanguage;
     }
 
     /// @dev Gets all the created accounts.
