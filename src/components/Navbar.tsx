@@ -1,5 +1,6 @@
 import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import { FiArrowUpRight } from "react-icons/fi";
+import Link from "next/link";
 
 const Navbar = () => {
     return (   
@@ -12,9 +13,11 @@ const Navbar = () => {
             </Flex>
             <Flex align='center' justify='space-evenly' w='full'>
                 <Text>Site Language: <Text as='b' color='#FDD835'>English</Text></Text>
-                <Button px='1.5em' bg='#FDD835' fontWeight={700} rightIcon={<FiArrowUpRight />}>
-                    Get started, it's free
-                </Button>
+                <Link href='/signup'>
+                    <Button px='1.5em' bg='#FDD835' fontWeight={700} rightIcon={<FiArrowUpRight />}>
+                        Get started, it's free
+                    </Button>
+                </Link>
             </Flex>
         </Flex>
     )
