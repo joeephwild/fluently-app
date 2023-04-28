@@ -6,17 +6,16 @@ import { Box, Container } from '@chakra-ui/react'
 import Meta from '@/components/Meta'
 import Navbar from '@/components/Navbar'
 import Header from '@/components/Header'
+import Layout from '@/components/layout/Layout'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
-    <>
-      <Box py='1em'>
+    <Layout>
         <Meta page='Home' />
         <Navbar />
         <Header />
-      </Box>
-    </>
+    </Layout>
   )
 }

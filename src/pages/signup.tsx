@@ -2,15 +2,16 @@ import { Box, Button, Center, Container, Flex, Image, Text } from "@chakra-ui/re
 import Meta from "@/components/Meta"
 import Link from "next/link"
 import SignupOption from "@/components/SignupOption"
+import Layout from "@/components/layout/Layout"
 
 const Signup = () => {
     return (
-        <Box py='1em' h='100vh'>
+        <Layout>
             <Meta page='Sign up'/>
-            <Container maxW='container.xl'>
-                <Link href='/'>
-                    <Image src='/icons/LOGO.svg' />
-                </Link>
+            <Link href='/'>
+                <Image src='/icons/LOGO.svg' />
+            </Link>
+            <Box>
                 <Center h='85vh'>
                     <Flex gap='20'>
                         <Box>
@@ -21,6 +22,8 @@ const Signup = () => {
                             boxShadow='0px 23px 57px rgba(255, 247, 209, 0.5)'
                             borderRadius={12}
                             p='1.5em'
+                            minW='550px'
+                            minH='450px'
                         >
                             <Text color='#A5A1A1' fontSize={12}>Already signed up?<Text as='u' ml='1em' color='#FDD835'>Sign in</Text></Text>
                             <Text fontWeight={700} fontSize={30} my='.2em'>Get started</Text>
@@ -43,8 +46,8 @@ const Signup = () => {
                         </Box>
                     </Flex>
                 </Center>
-            </Container>
-        </Box>
+            </Box>
+        </Layout>
     )
 }
 

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Navbar = () => {
     return (   
-        <Flex p='1em' w='full' align='center' justify='space-between' fontWeight={600}>
+        <Flex w='full' align='center' justify='space-between' fontWeight={600}>
             <Flex align='center' justify='space-evenly' w='full'>
                 <Image src='/icons/LOGO.svg' />
                 <Text>All features</Text>
