@@ -3,7 +3,7 @@ import { ConnectWallet, MetaMask } from "./ButtonIcon";
 import { BsExclamation } from 'react-icons/bs'
 import Link from "next/link";
 
-const SignupOption = () => {
+const SigninOption = () => {
     return (
         <Tabs isFitted variant="unstyled">
             <TabList>
@@ -19,7 +19,7 @@ const SignupOption = () => {
             />
             <TabPanels>
                 <TabPanel textAlign='left'>
-                    <Text fontWeight={400} fontSize={14} ml={0}>Sign up by connecting with any of your wallets</Text>
+                    <Text fontWeight={400} fontSize={14} ml={0}>Sign in by connecting with any of your wallets</Text>
                     <Flex align='center' gap='10' my='1em'>
                         <Button
                             border='1px solid #FDD835'
@@ -43,7 +43,7 @@ const SignupOption = () => {
                     </Flex>
                 </TabPanel>
                 <TabPanel>
-                    <Text fontWeight={400} fontSize={14} ml={0}>Sign up with Email address</Text>
+                    <Text fontWeight={400} fontSize={14} ml={0}>Sign in with Email address</Text>
                     <Input 
                         border='1px solid #FFF7D1'
                         // w='full'
@@ -75,4 +75,4 @@ const SignupOption = () => {
     )
 }
 
-export default SignupOption;
+export default SigninOption;

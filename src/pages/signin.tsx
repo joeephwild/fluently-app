@@ -4,8 +4,9 @@ import Link from "next/link"
 import SignupOption from "@/components/SignupOption"
 import Layout from "@/components/layout/Layout"
 import { Google } from "@/components/ButtonIcon"
+import SigninOption from "@/components/SigninOption"
 
-const Signup = () => {
+const Signin = () => {
     return (
         <Layout>
             <Meta page='Sign up'/>
@@ -26,9 +27,9 @@ const Signup = () => {
                             minW='550px'
                             minH='450px'
                         >
-                            <Text color='#A5A1A1' fontSize={12}>Already signed up? <Link href='/signin'><Text as='u' ml='1em' color='#FDD835'>Sign in</Text></Link></Text>
-                            <Text fontWeight={700} fontSize={30} my='.2em'>Get started</Text>
-                            <Text fontWeight={400} fontSize={14}>Let's start your language learning journey today!</Text>
+                            <Text color='#A5A1A1' fontSize={12}>Not signed up? <Link href='/signup'><Text as='u' ml='1em' color='#FDD835'>Sign up</Text></Link></Text>
+                            <Text fontWeight={700} fontSize={30} my='.2em'>Welcome back</Text>
+                            <Text fontWeight={400} fontSize={14}>Let's pick up where you left off!</Text>
                             <Button 
                                 my='1em' 
                                 border='1px solid #FDD835'
@@ -37,14 +38,14 @@ const Signup = () => {
                                 fontSize={14}
                                 leftIcon={<Google />}
                             >
-                                Sign up with Google
+                                Sign in with Google
                             </Button>
                             <Flex align='center' gap='5'>
                                 <Box borderBottom='0.5px solid #000' w='full' />
                                 <Text>OR</Text>
                                 <Box borderBottom='0.5px solid #000' w='full' />
                             </Flex>
-                            <SignupOption />
+                            <SigninOption />
                         </Box>
                     </Flex>
                 </Center>
@@ -53,4 +54,4 @@ const Signup = () => {
     )
 }
 
-export default Signup
+export default Signin
