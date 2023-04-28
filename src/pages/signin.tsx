@@ -9,7 +9,7 @@ import SigninOption from "@/components/SigninOption"
 const Signin = () => {
     return (
         <Layout>
-            <Meta page='Sign up'/>
+            <Meta page='Sign in'/>
             <Link href='/'>
                 <Image src='/icons/LOGO.svg' />
             </Link>
