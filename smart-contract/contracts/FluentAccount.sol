@@ -1,3 +1,11 @@
+
+///////////////////////////////////////////////////////////
+//                                                       //
+//     Built by joseph omotae                            //
+//     Powered by Filecoin (https://filecoin.io/)        //
+//                                                       //
+///////////////////////////////////////////////////////////
+
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
@@ -71,6 +79,7 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         uint256 matchId;
         uint256 time;
         string meetingLink;
+        bool userMatched;
     }
 
     Meeting[] private allMeetings;
@@ -78,6 +87,7 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     mapping(address => Account) private userProfiles;
     mapping(address => Meeting) allMeetingsByUser;
     mapping(address => Meeting[]) allMeetingsByAUser;
+    mapping(address => mapping(uint256 => Meeting[])) userMeetingById;
 
     /// @dev Creates a new account for the caller.
     /// @param _imageUri The user profile image;
@@ -119,12 +129,22 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     mapping(string => mapping(uint256 => Meeting[]))
         private meetingsByLanguageAndTime;
 
-    function createMeeting(
-        string memory _language,
-        string memory _nativeLanguage,
-        uint256 _time
-    ) external {
-        Meeting storage newMeeting = allMeetingsByUser[msg.sender];
+    
+    
+    /// @param a represent the first string to be compared to the second string
+    /// @param b represent the second string to be compared to the first string
+    function compareStrings(
+        string memory a,
+        string memory b
+    ) public pure returns (bool) {
+        return keccak256(abi.encodePacked(a)) == keccak256(abi.encodePacked(b));
+    }
+      function createMeeting(
+    string memory _language,
+    string memory _nativeLanguage,
+    uint256 _time
+) external returns(bool) {
+    Meeting storage newMeeting = allMeetingsByUser[msg.sender];
         newMeeting.user = msg.sender;
         newMeeting.language = _language;
         newMeeting.nativeLanguage = _nativeLanguage;
@@ -132,70 +152,45 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         newMeeting.matchId = 0;
         newMeeting.time = _time;
         allMeetings.push(newMeeting);
-    }
-    
-    /// @param a represent the first string to be compared to the second string
-    /// @param b represent the second string to be compared to the first string
-    function compareStrings(
-        string storage a,
-        string storage b
-    ) internal pure returns (bool) {
-        return keccak256(abi.encodePacked(a)) == keccak256(abi.encodePacked(b));
-    }
- 
-   //A function to match users from the meeting struct
-    function matchUsers(
-        string memory _language,
-        uint256 _time,
-        string memory _meetingLink
-    ) external {
-        Meeting[] storage meetings = meetingsByLanguageAndTime[_language][
-            _time
-        ];
-        for (uint256 i = 0; i < meetings.length; i++) {
-            Meeting storage meeting1 = meetings[i];
-            if (meeting1.matchStatus == MatchStatus.matched) {
-                continue;
-            }
-            for (uint256 j = i + 1; j < meetings.length; j++) {
-                Meeting storage meeting2 = meetings[j];
-                if ((meeting2.matchStatus) == MatchStatus.matched) {
-                    continue;
-                }
-                if (
-                    compareStrings(
-                        meeting1.nativeLanguage,
-                        meeting2.language
-                    ) &&
-                    compareStrings(meeting2.nativeLanguage, meeting1.language)
-                ) {
-                    meeting1.matchStatus = MatchStatus.matched;
-                    meeting1.matchId = i + 1;
-                    meeting1.meetingLink = _meetingLink;
-                    meeting2.matchStatus = MatchStatus.matched;
-                    meeting2.matchId = i + 1;
-                    meeting1.meetingLink = _meetingLink;
-                    break;
-                }
-            }
-        }
-    }
 
-    function getMatchedMeeting(
+    for (uint256 i = 0; i < allMeetings.length; i++) {
+        Meeting storage otherMeeting = allMeetings[i];
+
+        // Skip over the same meeting and meetings that are already matched
+        if (newMeeting.time != otherMeeting.time ||
+            newMeeting.matchStatus == MatchStatus.matched || 
+            otherMeeting.matchStatus == MatchStatus.matched ||
+            newMeeting.user == otherMeeting.user) {
+            continue;
+        }
+
+        // If the two users have a common language, create a match
+        if ( compareStrings(newMeeting.nativeLanguage, otherMeeting.language) &&
+            compareStrings(newMeeting.language, otherMeeting.nativeLanguage)
+            ) {
+            // Assign the two meetings a common matchId and update their match status
+            newMeeting.matchId = i;
+            otherMeeting.matchId = allMeetings.length-1;
+            newMeeting.matchStatus = MatchStatus.matched;
+            otherMeeting.matchStatus = MatchStatus.matched;
+            otherMeeting.userMatched = true;
+            newMeeting.userMatched = true;
+        }  
+    }
+    return newMeeting.userMatched;
+}
+
+
+ function getMatchedMeeting(
         address _user
     ) external view returns (Meeting memory) {
-        Meeting[] storage newMeeting = allMeetingsByAUser[_user];
-        for (uint i = 0; i < newMeeting.length; i++) {
-            Meeting memory meeting = allMeetings[i];
-            if (
-                meeting.matchStatus == MatchStatus.matched &&
-                meeting.user == _user
-            ) {
-                return meeting;
-            }
-        }
-        revert("User has not been matched");
+    require(allMeetingsByUser[_user].userMatched == true, "user not matched");
+    return allMeetingsByUser[_user];
     }
+
+   function _allMeetings() public view returns(Meeting[] memory){
+       return allMeetings;
+   }
 
     /// @dev Gets all the created accounts.
     function getAllUsers() external view returns (Account[] memory) {
