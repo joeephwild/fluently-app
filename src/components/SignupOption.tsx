@@ -27,6 +27,7 @@ const SignupOption = () => {
                             w='full'
                             fontSize={14}
                             rightIcon={<MetaMask />}  
+                            _hover={{ bg: 'transparent' }}
                         >
                             MetaMask
                         </Button>
@@ -37,6 +38,7 @@ const SignupOption = () => {
                             w='full'
                             fontSize={14}
                             rightIcon={<ConnectWallet />}
+                            _hover={{ bg: 'transparent' }}
                         >
                             ConnectWallet
                         </Button>

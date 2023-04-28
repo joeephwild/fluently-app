@@ -7,7 +7,7 @@ type Props = {
 
 const Layout = ({ children }: Props) => {
     return (
-        <Box w='100vw' h='100vh' py='1em' px='5em'>
+        <Box w='100vw' h='100vh' py='2em' px='5em'>
             {children}
         </Box>
     )

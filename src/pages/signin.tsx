@@ -37,6 +37,7 @@ const Signin = () => {
                                 w='full'
                                 fontSize={14}
                                 leftIcon={<Google />}
+                                _hover={{ bg: 'transparent' }}
                             >
                                 Sign in with Google
                             </Button>
