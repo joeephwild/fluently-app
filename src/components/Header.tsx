@@ -1,12 +1,12 @@
-import { Box, Button, Center, Flex, Input, Text } from "@chakra-ui/react"
+import { Box, Button, Center, Flex, Image, Input, Text } from "@chakra-ui/react"
 import { FiArrowUpRight } from "react-icons/fi";
 
 const Header = () => {
     return (
         <>
-            <Flex p='2em' px='5.5em' w='full' align='center' justify='space-between'>
-                <Flex w='95%' direction='column' justify='center' py='6em'>
-                    <Text fontWeight={700} fontSize='3em'>
+            <Flex p='2em' px='5.5em' w='full' align='center' justify='space-between' gap={40}>
+                <Flex w='full' direction='column' justify='center' py='6em'>
+                    <Text fontWeight={700} fontSize='2.8em'>
                         Connect with language partners and reach fluency faster
                     </Text>
                     <Text fontWeight={400} lineHeight={'30px'} mt='1em'>
@@ -19,8 +19,8 @@ const Header = () => {
                         </Button>
                     </Flex>
                 </Flex>
-                <Flex w='full'>
-
+                <Flex w='full' bgImage='/images/ellipse.svg' bgRepeat='no-repeat' bgSize='cover'>
+                    <Image src='/images/group.svg' w='100%'/>
                 </Flex>
             </Flex>
         </>
