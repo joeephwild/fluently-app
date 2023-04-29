@@ -16,6 +16,16 @@ export const theme = extendTheme({ colors })
 
 //const PROJECT_ID = process.env.NEXT_PUBLIC_PROJECT_ID
 
+const colors = {
+  brand: {
+    900: '#1a365d',
+    800: '#153e75',
+    700: '#2a69ac',
+  },
+}
+
+export const theme = extendTheme({ colors })
+
 export default function App({ Component, pageProps }: AppProps) {
   const { initialize, isInitialized } = useHuddle01();
   console.log(isInitialized);
