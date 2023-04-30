@@ -20,7 +20,7 @@ const Header = () => {
                     </Flex>
                 </Flex>
                 <Flex w='full' bgImage='/images/ellipse.svg' bgRepeat='no-repeat' bgSize='cover'>
-                    <Image src='/images/group.svg' w='100%'/>
+                    <Image src='/images/group.svg' w='100%' alt="group"/>
                 </Flex>
             </Flex>
         </>

@@ -6,7 +6,7 @@ const Navbar = () => {
     return (   
         <Flex w='full' align='center' justify='space-between' fontWeight={600}>
             <Flex align='center' justify='space-evenly' w='full'>
-                <Image src='/icons/LOGO.svg' />
+                <Image src='/icons/LOGO.svg' alt="nav" />
                 <Text>All features</Text>
                 <Text>Languages</Text>
                 <Text>FAQs</Text>
@@ -21,7 +21,7 @@ const Navbar = () => {
                         rightIcon={<FiArrowUpRight />}
                         _hover={{ bg: '#fbdb4f'}}
                     >
-                        Get started, it's free
+                        Get started, it`s free
                     </Button>
                 </Link>
             </Flex>
