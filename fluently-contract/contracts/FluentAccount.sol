@@ -1,4 +1,3 @@
-
 ///////////////////////////////////////////////////////////
 //                                                       //
 //     Built by joseph omotae                            //
@@ -20,36 +19,21 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 /// @author Joseph Omotade
 /// @notice A contract for creating and managing user accounts for the Fluent platform.
 
-interface FluentToken {
-    function distributeToken(address[] calldata recipients) external;
-}
-
 contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIdCounter;
 
     string private _baseTokenURI;
+    address tokenAddress ;
     uint8 rating;
-    address[] users;
 
-    function distributeToken(
-        address[] calldata recipients,
-        address _contracts
-    ) public {
-        IERC20 token = IERC20(_contracts);
-        uint256 amount = 100000000000000000;
-        for (uint i = 0; i < recipients.length; i++) {
-            require(
-                recipients[i] != address(0),
-                "Recipient address cannot be zero"
-            );
-            token.transfer(recipients[i], amount);
-        }
-    }
-
-    constructor(string memory baseTokenURI) ERC721("FluentToken", "FTK") {
+    constructor(
+        string memory baseTokenURI,
+        address _tokenAddress
+    ) ERC721("FluentToken", "FTK") {
         _baseTokenURI = baseTokenURI;
+        tokenAddress = _tokenAddress;
     }
 
     /// @dev Returns the base URI for the token.
@@ -82,7 +66,7 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         bool userMatched;
     }
 
-    Meeting[] private allMeetings;
+    Meeting[] allMeetings;
     Account[] private allUsers;
     mapping(address => Account) private userProfiles;
     mapping(address => Meeting) allMeetingsByUser;
@@ -109,7 +93,6 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         profile.userId = tokenId;
         _mint(msg.sender, tokenId);
         _tokenIdCounter.increment();
-        users.push(msg.sender);
         allUsers.push(profile);
     }
 
@@ -129,8 +112,6 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     mapping(string => mapping(uint256 => Meeting[]))
         private meetingsByLanguageAndTime;
 
-    
-    
     /// @param a represent the first string to be compared to the second string
     /// @param b represent the second string to be compared to the first string
     function compareStrings(
@@ -139,12 +120,13 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     ) public pure returns (bool) {
         return keccak256(abi.encodePacked(a)) == keccak256(abi.encodePacked(b));
     }
-      function createMeeting(
-    string memory _language,
-    string memory _nativeLanguage,
-    uint256 _time
-) external returns(bool) {
-    Meeting storage newMeeting = allMeetingsByUser[msg.sender];
+
+    function createMeeting(
+        string memory _language,
+        string memory _nativeLanguage,
+        uint256 _time
+    ) public returns (bool) {
+        Meeting storage newMeeting = allMeetingsByUser[msg.sender];
         newMeeting.user = msg.sender;
         newMeeting.language = _language;
         newMeeting.nativeLanguage = _nativeLanguage;
@@ -152,45 +134,58 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         newMeeting.matchId = 0;
         newMeeting.time = _time;
         allMeetings.push(newMeeting);
+        return newMeeting.userMatched;
+    }
 
-    for (uint256 i = 0; i < allMeetings.length; i++) {
-        Meeting storage otherMeeting = allMeetings[i];
+    function _match(string memory _meetingLink) public {
+        uint256 i;
+        uint256 j;
+        require(allMeetings.length > 0, "no meeting available");
+        for (i = 0; i < allMeetings.length; i++) {
+            for (j = i + 1; j < allMeetings.length; j++) {
+                // Skip over the same meeting and meetings that are already mat
+                if (
+                    allMeetings[i].time != allMeetings[j].time ||
+                    allMeetings[i].matchStatus == MatchStatus.matched ||
+                    allMeetings[j].matchStatus == MatchStatus.matched ||
+                    allMeetings[i].user == allMeetings[j].user
+                ) {
+                    continue;
+                }
 
-        // Skip over the same meeting and meetings that are already matched
-        if (newMeeting.time != otherMeeting.time ||
-            newMeeting.matchStatus == MatchStatus.matched || 
-            otherMeeting.matchStatus == MatchStatus.matched ||
-            newMeeting.user == otherMeeting.user) {
-            continue;
+                // If the two users have a common language, create a match
+                if (
+                    compareStrings(
+                        allMeetings[i].nativeLanguage,
+                        allMeetings[j].language
+                    ) &&
+                    compareStrings(
+                        allMeetings[i].language,
+                        allMeetings[j].nativeLanguage
+                    )
+                ) {
+                    // Assign the two meetings a common matchId and update their match status
+                    allMeetings[i].matchId = i;
+                    allMeetings[j].matchId = j;
+                    allMeetings[i].matchStatus = MatchStatus.matched;
+                    allMeetings[j].matchStatus = MatchStatus.matched;
+                    allMeetings[i].userMatched = true;
+                    allMeetings[j].userMatched = true;
+                    allMeetings[i].meetingLink = _meetingLink;
+                    allMeetings[j].meetingLink = _meetingLink;
+                }
+            }
         }
-
-        // If the two users have a common language, create a match
-        if ( compareStrings(newMeeting.nativeLanguage, otherMeeting.language) &&
-            compareStrings(newMeeting.language, otherMeeting.nativeLanguage)
-            ) {
-            // Assign the two meetings a common matchId and update their match status
-            newMeeting.matchId = i;
-            otherMeeting.matchId = allMeetings.length-1;
-            newMeeting.matchStatus = MatchStatus.matched;
-            otherMeeting.matchStatus = MatchStatus.matched;
-            otherMeeting.userMatched = true;
-            newMeeting.userMatched = true;
-        }  
-    }
-    return newMeeting.userMatched;
-}
-
-
- function getMatchedMeeting(
-        address _user
-    ) external view returns (Meeting memory) {
-    require(allMeetingsByUser[_user].userMatched == true, "user not matched");
-    return allMeetingsByUser[_user];
     }
 
-   function _allMeetings() public view returns(Meeting[] memory){
-       return allMeetings;
-   }
+    function _allMeetings() public view returns (Meeting[] memory) {
+        return allMeetings;
+    }
+
+    function getMatchedMeeting(address _user) public view returns (bool) {
+        require(allMeetingsByUser[_user].userMatched == true, "not matched");
+        return allMeetingsByUser[_user].userMatched;
+    }
 
     /// @dev Gets all the created accounts.
     function getAllUsers() external view returns (Account[] memory) {
@@ -202,6 +197,18 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         address _owner
     ) external view returns (Account memory) {
         return userProfiles[_owner];
+    }
+
+    function distributeToken(address[] calldata recipients) public {
+        IERC20 token = IERC20(tokenAddress);
+        uint256 amount = 100000000000000000;
+        for (uint i = 0; i < recipients.length; i++) {
+            require(
+                recipients[i] != address(0),
+                "Recipient address cannot be zero"
+            );
+            token.transfer(recipients[i], amount);
+        }
     }
 
     // The following functions are overrides required by Solidity.
