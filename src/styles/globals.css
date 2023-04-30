@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Frijole&display=swap');
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -77,15 +80,18 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: 'Space Grotesk';
 }
 
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  font-family: 'Space Grotesk';
 }
 
 body {
+  /* color: #fbdb4f; */
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
