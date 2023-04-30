@@ -62,7 +62,7 @@ contract FLUENTOKEN is ERC20, Pausable, Ownable {
      *
      * @param recipients An array of recipient addresses to distribute tokens to.
      */
-    function distributeToken(address[] calldata recipients) external {
+    function distributeToken(address[] calldata recipients) public {
         require(recipients.length > 0, "No recipients provided");
         require(recipients.length <= MAX_RECIPIENTS, "Too many recipients");
         uint256 amount = 100000000000000000; // 0.1 token with 18 decimal places
