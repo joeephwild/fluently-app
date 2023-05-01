@@ -14,7 +14,7 @@ const Welcome = () => {
                 direction='column'
                 align='center'
             >
-                <Image src='/images/welcome.svg' w='130px'/>
+                <Image src='/images/welcome.svg' w='130px' alt="welcome"/>
                 <Text my='1.5em' fontSize='1.7em' fontWeight={500}>Welcome to <Text as='b' color='#FDD835' fontFamily='Frijole'>Fluently</Text></Text>
                 <Text textAlign='center' fontWeight={400} color='#000'>
                     Ready to embark on a language adventure? With video calls and <br />interactive exercises, mastering a new language has never been <br />more fun. 

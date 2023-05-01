@@ -6,7 +6,7 @@ const Navbar = () => {
     return (   
         <Flex w='full' align='center' justify='space-between' fontWeight={600}>
             <Flex align='center' justify='space-evenly' w='full'>
-                <Image src='/icons/LOGO.svg' />
+                <Image src='/icons/LOGO.svg' alt="nav" />
                 <Text>All features</Text>
                 <Text>Languages</Text>
                 <Text>FAQs</Text>

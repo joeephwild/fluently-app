@@ -10,13 +10,13 @@ const Signup = () => {
         <Layout>
             <Meta page='Sign up'/>
             <Link href='/'>
-                <Image src='/icons/LOGO.svg' />
+                <Image src='/icons/LOGO.svg' alt="sign" />
             </Link>
             <Box>
                 <Center h='85vh'>
                     <Flex gap='20'>
                         <Box>
-                            <Image src='/images/bro.svg' />
+                            <Image src='/images/bro.svg' alt="sogn" />
                         </Box>
                         <Box 
                             border='1px solid #FFF7D1'
@@ -28,7 +28,7 @@ const Signup = () => {
                         >
                             <Text color='#A5A1A1' fontSize={12}>Already signed up? <Link href='/signin'><Text as='u' ml='1em' color='#FDD835'>Sign in</Text></Link></Text>
                             <Text fontWeight={700} fontSize={30} my='.2em'>Get started</Text>
-                            <Text fontWeight={400} fontSize={14}>Let's start your language learning journey today!</Text>
+                            <Text fontWeight={400} fontSize={14}>Let`s start your language learning journey today!</Text>
                             <Button 
                                 my='1em' 
                                 border='1px solid #FDD835'
