@@ -21,7 +21,7 @@ const Navbar = () => {
                         rightIcon={<FiArrowUpRight />}
                         _hover={{ bg: '#fbdb4f'}}
                     >
-                        Get started, it's free
+                        Get started, it`s free
                     </Button>
                 </Link>
             </Flex>
