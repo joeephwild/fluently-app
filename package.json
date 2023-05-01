@@ -13,6 +13,8 @@
     "@chakra-ui/react": "^2.5.5",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@huddle01/huddle01-client": "^0.0.9",
+    "@huddle01/huddle01-iframe": "^0.0.9",
     "@huddle01/react": "^0.0.9",
     "@types/node": "18.15.11",
     "@types/react": "18.0.37",
