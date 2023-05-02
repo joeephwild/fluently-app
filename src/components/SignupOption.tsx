@@ -15,6 +15,11 @@ import {
 import { ConnectWallet, MetaMask } from "./ButtonIcon";
 import { BsExclamation } from "react-icons/bs";
 import Link from "next/link";
+import {
+  useMetamask,
+  useAddress,
+  ConnectWallet as ConnectWeb3Wallet,
+} from "@thirdweb-dev/react";
 
 const SignupOption = () => {
   return (
