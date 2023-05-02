@@ -3,6 +3,7 @@ import { Button, Flex, Image, Menu, MenuButton, MenuItem, MenuList, Tab, TabIndi
 import { IoIosArrowDown } from "react-icons/io"
 import Meta from "@/components/Meta"
 import DashboardPanel from "@/components/Dashboard"
+import Link from "next/link"
 
 const Dashboard = () => {
     return (
@@ -20,9 +21,9 @@ const Dashboard = () => {
                         Johnson
                     </MenuButton>
                     <MenuList>
-                        <a href='/'>
+                        <Link href='/'>
                             <MenuItem _hover={{ bg: '#FFFDF6' }}>Logout</MenuItem>
-                        </a>
+                        </Link>
                     </MenuList>
                 </Menu>
             </Flex>

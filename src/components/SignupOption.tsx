@@ -15,11 +15,8 @@ import {
 import { ConnectWallet, MetaMask } from "./ButtonIcon";
 import { BsExclamation } from "react-icons/bs";
 import Link from "next/link";
-import { useMetamask, useWalletConnect } from "@thirdweb-dev/react";
 
 const SignupOption = () => {
-  const connect = useMetamask();
-  const walletConnect = useWalletConnect()
   return (
     <Tabs isFitted variant="unstyled">
       <TabList>
@@ -40,7 +37,6 @@ const SignupOption = () => {
           </Text>
           <Flex align="center" gap="10" my="1em">
             <Button
-              onClick={() => connect()}
               border="1px solid #FDD835"
               bg="#FBFAF7"
               w="full"
@@ -52,7 +48,6 @@ const SignupOption = () => {
             </Button>
 
             <Button
-            onClick={() => walletConnect()}
               border="1px solid #FDD835"
               bg="#FBFAF7"
               w="full"

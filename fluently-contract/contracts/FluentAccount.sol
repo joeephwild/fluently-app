@@ -25,7 +25,7 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     Counters.Counter private _tokenIdCounter;
 
     string private _baseTokenURI;
-    address tokenAddress ;
+    address tokenAddress;
     uint8 rating;
 
     constructor(
@@ -124,6 +124,7 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     function createMeeting(
         string memory _language,
         string memory _nativeLanguage,
+        string memory _meetingLink,
         uint256 _time
     ) public returns (bool) {
         Meeting storage newMeeting = allMeetingsByUser[msg.sender];
@@ -134,10 +135,7 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         newMeeting.matchId = 0;
         newMeeting.time = _time;
         allMeetings.push(newMeeting);
-        return newMeeting.userMatched;
-    }
 
-    function _match(string memory _meetingLink) public {
         uint256 i;
         uint256 j;
         require(allMeetings.length > 0, "no meeting available");
@@ -176,6 +174,7 @@ contract FluentAccount is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
                 }
             }
         }
+        return newMeeting.userMatched;
     }
 
     function _allMeetings() public view returns (Meeting[] memory) {
