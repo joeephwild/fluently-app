@@ -1,5 +1,5 @@
 import { Box, Button, Heading, TableContainer, Table, Thead, Tbody, Td, Th, Tr, Text, Flex, useDisclosure } from "@chakra-ui/react";
-import Setup from "./modal/setup";
+import Setup from "./modal/Setup";
 
 const Dashboard = () => {
     const { isOpen, onOpen, onClose } = useDisclosure() 
