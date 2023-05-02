@@ -45,7 +45,7 @@ const Speak: React.FC<Props> = ({ setActiveComponent }) => {
                     rightIcon={<FiArrowRight />}
                     bg='#FDD835'
                     _hover={{ bg: "#fbdb4f" }}
-                    onClick={() => setActiveComponent('speak')}
+                    onClick={() => setActiveComponent('available')}
                 >
                     Next
                 </Button>

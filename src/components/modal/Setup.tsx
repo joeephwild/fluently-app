@@ -1,7 +1,9 @@
 import { Box, Button, Flex, FormControl, FormLabel, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Text } from "@chakra-ui/react"
 import { useState } from "react";
+import Availability from "./component/Availability";
 import Learn from "./component/Learn";
 import Speak from "./component/Speak";
+import Complete from "./component/Complete";
 
 interface Props {
     isOpen: boolean;
@@ -21,6 +23,8 @@ const Setup : React.FC<Props> = ({ isOpen, onClose }) => {
                 </ModalHeader>
                 {activeComponent === 'learn' && <Learn setActiveComponent={setActiveComponent} />}
                 {activeComponent === 'speak' && <Speak setActiveComponent={setActiveComponent} />}
+                {activeComponent === 'available' && <Availability setActiveComponent={setActiveComponent} />}
+                {activeComponent === 'complete' && <Complete onClose={onClose} />}
             </ModalContent>
         </Modal>
     )
