@@ -39,6 +39,7 @@ const Header = () => {
                 bg="#FDD835"
                 fontWeight={700}
                 rightIcon={<FiArrowUpRight />}
+                _hover={{ bg: "#fbdb4f" }}
               >
                 Start now
               </Button>
