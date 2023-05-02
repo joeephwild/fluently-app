@@ -19,7 +19,7 @@ const Welcome = () => {
                 <Text textAlign='center' fontWeight={400} color='#000'>
                     Ready to embark on a language adventure? With video calls and <br />interactive exercises, mastering a new language has never been <br />more fun. 
                 </Text>
-                <a href="/onboarding">
+                <a href="/dashboard">
                     <Button
                         rightIcon={<FiArrowRight />}
                         mt='2em'

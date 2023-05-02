@@ -10,7 +10,7 @@ const onboarding = () => {
             <Center>  
                 <Image src="/icons/LOGO.svg" alt="logo" />   
             </Center>
-            <Box borderBottom='8px solid #FBFAF7' w='80vw' my='2em' />
+            {/* <Box borderBottom='8px solid #FBFAF7' w='80vw' my='2em' /> */}
             <Box px='4em'>
                 <Text fontWeight={700} mb='4em'>Select your language objectives</Text>
                 <Flex justify='center' gap={20}>
