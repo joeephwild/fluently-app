@@ -19,7 +19,7 @@ const Navbar = () => {
             English
           </Text>
         </Text>
-        <Link as={NextLink} href="/signin">
+        <a href="./signup">
           <Button
             px="1.5em"
             bg="#FDD835"
@@ -29,7 +29,7 @@ const Navbar = () => {
           >
             Get started, it`s free
           </Button>
-        </Link>
+        </a>
       </Flex>
     </Flex>
   );

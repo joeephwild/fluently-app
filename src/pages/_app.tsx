@@ -1,6 +1,8 @@
 import "@/styles/globals.css";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
+import { ThirdwebProvider } from "@thirdweb-dev/react";
+import { useEffect } from 'react'
 
 const colors = {
   brand: {
@@ -15,10 +17,11 @@ export const theme = extendTheme({ colors });
 //const PROJECT_ID = process.env.NEXT_PUBLIC_PROJECT_ID
 
 export default function App({ Component, pageProps }: AppProps) {
- 
   return (
     <ChakraProvider>
-      <Component {...pageProps} />
+      <ThirdwebProvider activeChain="filecoin-testnet">
+        <Component {...pageProps} />
+      </ThirdwebProvider>
     </ChakraProvider>
   );
 }

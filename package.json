@@ -13,19 +13,26 @@
     "@chakra-ui/react": "^2.5.5",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-    "@huddle01/huddle01-client": "^0.0.9",
+    "@huddle01/huddle01-client": "^0.0.10",
     "@huddle01/huddle01-iframe": "^0.0.9",
-    "@huddle01/react": "^0.0.9",
+    "@thirdweb-dev/react": "^3.11.8",
+    "@thirdweb-dev/sdk": "^3.10.11",
     "@types/node": "18.15.11",
     "@types/react": "18.0.37",
     "@types/react-dom": "18.0.11",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
+    "ethers": "^5.7.2",
     "framer-motion": "^10.12.4",
     "next": "13.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.23",
+    "tailwindcss": "^3.3.2"
   }
 }
