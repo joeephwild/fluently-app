@@ -25,7 +25,7 @@ const Availability: React.FC<Props> = ({ setActiveComponent }) => {
                         </Flex>
                         <MdKeyboardArrowRight color='#FDD835' />
                     </Flex>
-                    <Center w='95%' h='100px' bg='#F8F8F8' borderRadious={6}>
+                    <Center w='95%' h='100px' bg='#F8F8F8' borderRadius={6}>
                         <Wrap>
                             <WrapItem px='1em' border='1px solid #FBCC00' borderRadius={3}>
                                 04:00 PM
