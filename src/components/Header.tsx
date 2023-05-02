@@ -8,10 +8,15 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FiArrowUpRight } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 const Header = () => {
   return (
-    <>
+    <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 1.2 }}
+    >
       <Flex
         p="2em"
         px="5.5em"
@@ -21,10 +26,10 @@ const Header = () => {
         gap={40}
       >
         <Flex w="full" direction="column" justify="center" py="6em">
-          <Text fontWeight={700} fontSize="2.8em">
+          <Text fontWeight={700} fontSize="2.6em">
             Connect with language partners and reach fluency faster
           </Text>
-          <Text fontWeight={400} lineHeight={"30px"} mt="1em">
+          <Text fontWeight={400} fontSize='.95em' lineHeight={"30px"} mt="1em">
             With Fluently, you can easily connect with language partners who
             share your language learning goals and interests. Our video call
             feature makes it easy to have interactive and engaging conversations
@@ -46,16 +51,22 @@ const Header = () => {
             </a>
           </Flex>
         </Flex>
-        <Flex
-          w="full"
-          bgImage="/images/ellipse.svg"
-          bgRepeat="no-repeat"
-          bgSize="cover"
+        <motion.div
+          initial={{ y: -150, opacity: 0 }}
+          animate={{ y: -10, opacity: 1 }}
+          transition={{ delay: 0.6, duration: 1, type: 'spring', stiffness: 30 }}
         >
-          <Image src="/images/group.svg" w="100%" alt="group" />
-        </Flex>
+          <Flex
+            w="full"
+            bgImage="/images/ellipse.svg"
+            bgRepeat="no-repeat"
+            bgSize="cover"
+          >
+            <Image src="/images/group.svg" w="100%" alt="group" />
+          </Flex>
+        </motion.div>
       </Flex>
-    </>
+    </motion.div>
   );
 };
 
