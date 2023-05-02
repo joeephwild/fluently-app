@@ -1,5 +1,4 @@
 import { Box, Button, Center, Flex, FormControl, FormLabel, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Text, Wrap, WrapItem } from "@chakra-ui/react"
-import { BsQuestionCircleFill, BsSearch, BsSearchHeartFill, BsStar } from "react-icons/bs";
 import { FiArrowRight } from "react-icons/fi";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md"
 
