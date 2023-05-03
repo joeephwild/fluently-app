@@ -34,7 +34,7 @@ const Speak: React.FC<Props> = ({ setActiveComponent }) => {
                                 <Box 
                                     onClick={() => {
                                         setBeginner(true)
-                                        setIntermediate(prev => !prev)
+                                        !native && setIntermediate(prev => !prev)
                                     }}
                                 >
                                    {intermediate ? <BsStarFill size={24} /> : <BsStar size={24} />}
