@@ -4,16 +4,17 @@ import { FiArrowRight } from "react-icons/fi";
 
 type Props = {
     onClose: () => void;
+    setActiveComponent: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const Complete: React.FC<Props> = ({ onClose }) => {
+const Complete: React.FC<Props> = ({ onClose, setActiveComponent }) => {
 
     return (
         <>
             <ModalBody m='2em' p='1em'>
                 <Flex align='center' direction='column' gap={3}>
                     <Image src='/icons/thumbs.svg' alt='icon' boxSize={32} />
-                    <Text color='#FDD835' fontWeight={500} fontSize='1.5em'>Congratulations</Text>
+                    <Text color='#FDD835' fontWeight={500} fontSize='1.5em'>Congratulations!</Text>
                     <Text fontSize='.9em'>You`ve been matched successfully!</Text>
 
                     <Box p='1em' bg='#FFFBEC'>
@@ -28,7 +29,10 @@ const Complete: React.FC<Props> = ({ onClose }) => {
                     rightIcon={<BsCheck />}
                     bg='#FDD835'
                     _hover={{ bg: "#fbdb4f" }}
-                    onClick={onClose}
+                    onClick={() => {
+                        setActiveComponent('learn');
+                        onClose();
+                    }}
                 >
                     Okay, got it
                 </Button>

@@ -6,6 +6,10 @@ import {
   FormControl,
   FormLabel,
   Image,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -22,7 +26,9 @@ import {
   BsSearch,
   BsSearchHeartFill,
   BsStar,
+  BsStarFill,
 } from "react-icons/bs";
+import { useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
 
 type Props = {
@@ -32,6 +38,9 @@ type Props = {
 const Learn: React.FC<Props> = ({ setActiveComponent }) => {
   const { language, setLanguage } = useFluentContext();
   console.log(language)
+    const [beginner, setBeginner] = useState(false)
+    const [intermediate, setIntermediate] = useState(false)
+    const [native, setNative] = useState(false)
 
   return (
     <>
@@ -55,34 +64,80 @@ const Learn: React.FC<Props> = ({ setActiveComponent }) => {
               <option value="Germany">Germany</option>
               <option value="Korean">Korean</option>
             </Select>
-          </FormControl>
-          <FormControl mt="1.25em">
-            <FormLabel mb=".5em" fontSize=".9em">
-              Select your proficiency level
-            </FormLabel>
-            <Flex align="center" justifyContent="space-between">
-              <Flex gap={4}>
-                <BsStar />
-                <BsStar />
-                <BsStar />
-              </Flex>
-              <BsQuestionCircleFill color="#FDD835" />
-            </Flex>
-          </FormControl>
-        </Box>
-      </ModalBody>
-      <ModalFooter mt="2em">
-        <Button
-          rightIcon={<FiArrowRight />}
-          bg="#FDD835"
-          _hover={{ bg: "#fbdb4f" }}
-          onClick={() => setActiveComponent("speak")}
-        >
-          Next
-        </Button>
-      </ModalFooter>
-    </>
-  );
-};
+                    </FormControl>
+                    <FormControl mt='1.25em'>
+                        <FormLabel mb='.5em' fontSize='.9em'>Select your proficiency level</FormLabel>
+                        <Flex align='center' justifyContent='space-between'>
+                            <Flex gap={4} color='#FDD835'>
+                                <Box onClick={() => setBeginner(prev => !prev)}>
+                                    {beginner ? <BsStarFill size={24} /> : <BsStar size={24} />}
+                                </Box>
+                                <Box 
+                                    onClick={() => {
+                                        setBeginner(true)
+                                        !native && setIntermediate(prev => !prev)
+                                    }}
+                                >
+                                   {intermediate ? <BsStarFill size={24} /> : <BsStar size={24} />}
+                                </Box>
+                                <Box
+                                    onClick={() => {
+                                        setBeginner(true)
+                                        setIntermediate(true)
+                                        setNative(prev => !prev)
+                                    }}
+                                >
+                                   {native ? <BsStarFill size={24} /> : <BsStar size={24} />}
+                                </Box>
+                            </Flex>
+                            <Menu>
+                                <MenuButton>
+                                    <BsQuestionCircleFill color='#FDD835' size={16} />
+                                </MenuButton>
+                                <MenuList>
+                                    <MenuItem p='2em' bg='transparent' _hover={{ bg: 'transparent' }}>
+                                        <Flex direction='column' gap={4}>
+                                            <Flex gap={8}>
+                                                <Image src='/images/beginner.svg' alt='beginner' w='25%' />
+                                                <Box>
+                                                    <Text fontWeight={700} fontSize='.8em'>Beginner</Text>
+                                                    <Text fontSize='.7em'>I have a basic understanding of the language.</Text>
+                                                </Box>
+                                            </Flex>
+                                            <Flex gap={8}>
+                                                <Image src='/images/intermediate.svg' alt='intermediate' w='25%' />
+                                                <Box textAlign='left' alignSelf='start'>
+                                                    <Text fontWeight={700} fontSize='.8em'>Intermediate</Text>
+                                                    <Text fontSize='.7em'>I can communicate effectively.</Text>
+                                                </Box>
+                                            </Flex>
+                                            <Flex gap={8}>
+                                                <Image src='/images/native.svg' alt='native' w='25%' />
+                                                <Box textAlign='left' alignSelf='start'>
+                                                    <Text fontWeight={700} fontSize='.8em'>Native speaker</Text>
+                                                    <Text fontSize='.7em'>Native speaker seeking fluency in another language.</Text>
+                                                </Box>
+                                            </Flex>
+                                        </Flex>
+                                    </MenuItem>
+                                </MenuList>
+                            </Menu>
+                        </Flex>
+                    </FormControl>
+                </Box>
+            </ModalBody>
+            <ModalFooter mt='2em'>
+                <Button 
+                    rightIcon={<FiArrowRight />}
+                    bg='#FDD835'
+                    _hover={{ bg: "#fbdb4f" }}
+                    onClick={() => setActiveComponent('speak')}
+                >
+                    Next
+                </Button>
+            </ModalFooter>
+        </>
+    )
+}
 
 export default Learn;

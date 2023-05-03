@@ -29,33 +29,21 @@ interface Props {
 const Setup: React.FC<Props> = ({ isOpen, onClose }) => {
   const [activeComponent, setActiveComponent] = useState<string>("learn");
 
-  return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalCloseButton
-          _hover={{
-            bg: "transparent",
-            color: "#FDD835",
-            border: "1px solid #FDD835",
-          }}
-        />
-        <ModalHeader>
-          {/* <Image src='/icons/LOGO.svg' alt='logo' /> */}
-        </ModalHeader>
-        {activeComponent === "learn" && (
-          <Learn setActiveComponent={setActiveComponent} />
-        )}
-        {activeComponent === "speak" && (
-          <Speak setActiveComponent={setActiveComponent} />
-        )}
-        {activeComponent === "available" && (
-          <Availability setActiveComponent={setActiveComponent} />
-        )}
-        {activeComponent === "complete" && <Complete onClose={onClose} />}
-      </ModalContent>
-    </Modal>
-  );
-};
+    return (
+        <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+                <ModalCloseButton _hover={{ bg: 'transparent', color: '#FDD835', border: '1px solid #FDD835'}} />
+                <ModalHeader>
+                    {/* <Image src='/icons/LOGO.svg' alt='logo' /> */}
+                </ModalHeader>
+                {activeComponent === 'learn' && <Learn setActiveComponent={setActiveComponent} />}
+                {activeComponent === 'speak' && <Speak setActiveComponent={setActiveComponent} />}
+                {activeComponent === 'available' && <Availability setActiveComponent={setActiveComponent} />}
+                {activeComponent === 'complete' && <Complete setActiveComponent={setActiveComponent} onClose={onClose} />}
+            </ModalContent>
+        </Modal>
+    )
+}
 
 export default Setup;
