@@ -15,7 +15,7 @@ const Complete: React.FC<Props> = ({ onClose, setActiveComponent }) => {
                 <Flex align='center' direction='column' gap={3}>
                     <Image src='/icons/thumbs.svg' alt='icon' boxSize={32} />
                     <Text color='#FDD835' fontWeight={500} fontSize='1.5em'>Congratulations!</Text>
-                    <Text fontSize='.9em'>You've been matched successfully!</Text>
+                    <Text fontSize='.9em'>You`ve been matched successfully!</Text>
 
                     <Box p='1em' bg='#FFFBEC'>
                         <Text fontSize='.8em' textAlign='center' fontWeight={500}>
