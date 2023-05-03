@@ -15,46 +15,7 @@ import {
 import { ConnectWallet, MetaMask } from "./ButtonIcon";
 import { BsExclamation } from "react-icons/bs";
 import Link from "next/link";
-import { useMetamask, useWalletConnect } from "@thirdweb-dev/react";
 
-<<<<<<< HEAD
-const SigninOption = () => {
-  const connect = useMetamask();
-  const walletConnect = useWalletConnect()
-  return (
-    <Tabs isFitted variant="unstyled">
-      <TabList>
-        <Tab>Wallet</Tab>
-        <Tab>Email</Tab>
-      </TabList>
-      <TabIndicator
-        mt="-1.5px"
-        height="2px"
-        width="30px"
-        bg="#000"
-        borderRadius="1px"
-      />
-      <TabPanels>
-        <TabPanel textAlign="left">
-          <Text fontWeight={400} fontSize={14} ml={0}>
-            Sign i by connecting with any of your wallets
-          </Text>
-          <Flex align="center" gap="10" my="1em">
-            <Button
-              onClick={() => connect()}
-              border="1px solid #FDD835"
-              bg="#FBFAF7"
-              w="full"
-              fontSize={14}
-              rightIcon={<MetaMask />}
-              _hover={{ bg: "transparent" }}
-            >
-              MetaMask
-            </Button>
-
-            <Button
-             onClick={() => walletConnect()}
-=======
 import {
   useMetamask,
   useAddress,
@@ -95,7 +56,6 @@ const SigninOption = () => {
             </Button>
 
             <Button
->>>>>>> 6303730b44d210b62ba505ebd608f48996cbc63f
               border="1px solid #FDD835"
               bg="#FBFAF7"
               w="full"
@@ -103,10 +63,8 @@ const SigninOption = () => {
               rightIcon={<ConnectWallet />}
               _hover={{ bg: "transparent" }}
             >
-<<<<<<< HEAD
               ConnectWallet
             </Button>
-=======
               <ConnectWeb3Wallet
                 btnTitle="Get Started"
                 theme="light"
@@ -114,7 +72,6 @@ const SigninOption = () => {
               />
             </Button> */}
             <ConnectWeb3Wallet />
->>>>>>> 6303730b44d210b62ba505ebd608f48996cbc63f
           </Flex>
         </TabPanel>
         <TabPanel>
