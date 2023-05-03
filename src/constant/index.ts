@@ -3,7 +3,7 @@ import FluentTokenAbi from "./FLUENTOKEN.json";
 import { ethers } from "ethers";
 
 export const tokenAddress = "0x7cc168Ed905f1160C6AfcFf64FA691f5462a13CA";
-export const tokenAccount = "0xE4c84a30D8c6D8f6f86D916Dc62387A5Fc12193D";
+export const tokenAccount = "0x86Ae062a625e1950009D6f3863199282C196F528";
 
 export const accountAbi = FlentAccountAbi.abi;
 export const tokenAbi = FluentTokenAbi.abi;
