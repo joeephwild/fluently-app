@@ -20,8 +20,18 @@ import {
   useAddress,
   ConnectWallet as ConnectWeb3Wallet,
 } from "@thirdweb-dev/react";
+import { useRouter } from "next/router";
 
 const SignupOption = () => {
+  const router = useRouter()
+  
+  const connect = useMetamask();
+
+  function ConnectToMetamask  () {
+    connect();
+    router.push("/dashboard")
+    return connect
+  }
   return (
     <Tabs isFitted variant="unstyled">
       <TabList>
@@ -42,6 +52,7 @@ const SignupOption = () => {
           </Text>
           <Flex align="center" gap="10" my="1em">
             <Button
+            onClick={() => ConnectToMetamask()}
               border="1px solid #FDD835"
               bg="#FBFAF7"
               w="full"

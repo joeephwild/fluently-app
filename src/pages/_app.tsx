@@ -18,7 +18,9 @@ import {
   metamaskWallet,
   coinbaseWallet,
   walletConnect,
+  useAddress,
 } from "@thirdweb-dev/react";
+import { useRouter } from "next/router";
 
 export const theme = extendTheme({ colors });
 
@@ -26,6 +28,14 @@ export const theme = extendTheme({ colors });
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
+  const address = useAddress();
+  const Router = useRouter();
+
+  useEffect(() => {
+    if (address) {
+      Router.push("/dasboard");
+    }
+  }, [address]);
 
   return (
     <QueryClientProvider client={queryClient}>
