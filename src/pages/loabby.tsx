@@ -42,7 +42,7 @@ const Loabby = () => {
     noBorder: false, // false by default
   };
   return (
-    <div className="min-h-screenw-full">
+    <div >
       <div>
             <HuddleIframe config={iframeConfig} />
         </div>

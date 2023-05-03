@@ -2,7 +2,7 @@ import React from "react";
 
 const Video = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center w-full">
+    <div>
      josep
     </div>
   );

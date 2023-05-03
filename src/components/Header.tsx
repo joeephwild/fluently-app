@@ -62,7 +62,7 @@ const Header = () => {
             bgRepeat="no-repeat"
             bgSize="cover"
           >
-            <Image src="/images/group.svg" w="100%" alt="group" />
+            <Image src="/images/group.svg" w="100%" h="60%" alt="group" />
           </Flex>
         </motion.div>
       </Flex>
