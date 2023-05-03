@@ -21,7 +21,7 @@ const Dashboard = () => {
                     </MenuButton>
                     <MenuList>
                         <a href='/'>
-                            <MenuItem _hover={{ bg: '#FFFDF6' }}>Logout</MenuItem>
+                            <MenuItem bg='transparent' _hover={{ bg: '#FFF7D1' }}>Logout</MenuItem>
                         </a>
                     </MenuList>
                 </Menu>

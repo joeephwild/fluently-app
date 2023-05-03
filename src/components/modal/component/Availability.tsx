@@ -15,16 +15,16 @@ const Availability: React.FC<Props> = ({ setActiveComponent }) => {
                 <Text fontSize='.8em' mt='.5em'>Please select from the available time slots to increase the chances of finding a suitable language exchange partner.</Text>
                 <Box mt='1em'>
                     <Flex align='center'>
-                        <MdKeyboardArrowLeft color='#FDD835' />
+                        <MdKeyboardArrowLeft color='#FDD835' size={24} />
                         <Flex w='90%'>
                             <Box>
                                 <Text fontSize='.8em'>Thurs</Text>
                                 <Text fontSize='.8em'>April 27</Text>
                             </Box>
                         </Flex>
-                        <MdKeyboardArrowRight color='#FDD835' />
+                        <MdKeyboardArrowRight color='#FDD835' size={24} />
                     </Flex>
-                    <Center w='95%' h='100px' bg='#F8F8F8' borderRadius={6}>
+                    <Center w='full' h='100px' bg='#F8F8F8' borderRadius={6} m={2}>
                         <Wrap>
                             <WrapItem px='1em' border='1px solid #FBCC00' borderRadius={3}>
                                 04:00 PM
