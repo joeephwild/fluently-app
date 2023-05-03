@@ -17,9 +17,9 @@ const Signup = () => {
   return (
     <Layout>
       <Meta page="Sign up" />
-      <a href="/">
+      <Link href="/">
         <Image src="/icons/LOGO.svg" alt="sign" />
-      </a>
+      </Link>
       <Box>
         <Center h="85vh">
           <Flex gap="20">
@@ -36,11 +36,11 @@ const Signup = () => {
             >
               <Text color="#A5A1A1" fontSize={12}>
                 Already signed up?{" "}
-                <a href="./signin">
+                <Link href="./signin">
                   <Text as="u" ml="1em" color="#FDD835">
                     Sign in
                   </Text>
-                </a>
+                </Link>
               </Text>
               <Text fontWeight={700} fontSize={30} my=".2em">
                 Get started

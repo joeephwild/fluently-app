@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import { FiArrowUpRight } from "react-icons/fi";
-import Link from "next/link";
+import NextLink from "next/link";
+import { Link } from "@chakra-ui/react";
 
 const Navbar = () => {
   return (
@@ -18,7 +19,7 @@ const Navbar = () => {
             English
           </Text>
         </Text>
-        <a href="/signup">
+        <Link href="/signup">
           <Button
             px="1.5em"
             bg="#FDD835"
@@ -28,7 +29,7 @@ const Navbar = () => {
           >
             Get started, it`s free
           </Button>
-        </a>
+        </Link>
       </Flex>
     </Flex>
   );
