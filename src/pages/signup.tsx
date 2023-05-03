@@ -18,9 +18,9 @@ const Signup = () => {
   return (
     <Layout>
       <Meta page="Sign up" />
-      <a href="/">
+      <Link href="/">
         <Image src="/icons/LOGO.svg" alt="sign" />
-      </a>
+      </Link>
       <Box>
         <Center h="85vh">
           <Flex gap="20">

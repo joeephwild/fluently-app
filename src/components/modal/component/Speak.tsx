@@ -27,13 +27,13 @@ const Speak: React.FC<Props> = ({ setActiveComponent }) => {
                     <FormControl mt='1.25em'>
                         <FormLabel mb='.5em' fontSize='.9em'>Select your proficiency level</FormLabel>
                         <Flex align='center' justifyContent='space-between'>
-                            <Flex gap={4} color='#FDD835'>
+                        <Flex gap={4} color='#FDD835'>
                                 <Box onClick={() => setBeginner(prev => !prev)}>
                                     {beginner ? <BsStarFill size={24} /> : <BsStar size={24} />}
                                 </Box>
                                 <Box 
                                     onClick={() => {
-                                        setBeginner(prev => !prev)
+                                        setBeginner(true)
                                         setIntermediate(prev => !prev)
                                     }}
                                 >
@@ -41,8 +41,8 @@ const Speak: React.FC<Props> = ({ setActiveComponent }) => {
                                 </Box>
                                 <Box
                                     onClick={() => {
-                                        setBeginner(prev => !prev)
-                                        setIntermediate(prev => !prev)
+                                        setBeginner(true)
+                                        setIntermediate(true)
                                         setNative(prev => !prev)
                                     }}
                                 >

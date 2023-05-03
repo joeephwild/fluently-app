@@ -19,7 +19,7 @@ const Signin = () => {
   return (
     <Layout>
       <Meta page="Sign in" />
-      <a href="./">
+      <a title="home" href="./">
         <Image src="/icons/LOGO.svg" alt="signin" />
       </a>
       <Box>

@@ -33,7 +33,7 @@ const Learn: React.FC<Props> = ({ setActiveComponent }) => {
                                 </Box>
                                 <Box 
                                     onClick={() => {
-                                        setBeginner(prev => !prev)
+                                        setBeginner(true)
                                         setIntermediate(prev => !prev)
                                     }}
                                 >
@@ -41,8 +41,8 @@ const Learn: React.FC<Props> = ({ setActiveComponent }) => {
                                 </Box>
                                 <Box
                                     onClick={() => {
-                                        setBeginner(prev => !prev)
-                                        setIntermediate(prev => !prev)
+                                        setBeginner(true)
+                                        setIntermediate(true)
                                         setNative(prev => !prev)
                                     }}
                                 >
