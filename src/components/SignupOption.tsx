@@ -20,8 +20,18 @@ import {
   useAddress,
   ConnectWallet as ConnectWeb3Wallet,
 } from "@thirdweb-dev/react";
+import { useRouter } from "next/router";
 
 const SignupOption = () => {
+  const router = useRouter()
+  
+  const connect = useMetamask();
+
+  function ConnectToMetamask  () {
+    connect();
+    router.push("/dashboard")
+    return connect
+  }
   return (
     <Tabs isFitted variant="unstyled">
       <TabList>
@@ -40,29 +50,29 @@ const SignupOption = () => {
           <Text fontWeight={400} fontSize={14} ml={0}>
             Sign up by connecting with any of your wallets
           </Text>
-          <Flex align="center" gap="10" my="4em" justifyContent="center">
-            {/* <Button
-                            border='1px solid #FDD835'
-                            bg='#FBFAF7'
-                            w='full'
-                            fontSize={14}
-                            rightIcon={<MetaMask />}  
-                            _hover={{ bg: 'transparent' }}
-                        >
-                            MetaMask
-                        </Button>
-                        
-                        <Button
-                            border='1px solid #FDD835'
-                            bg='#FBFAF7'
-                            w='full'
-                            fontSize={14}
-                            rightIcon={<ConnectWallet />}
-                            _hover={{ bg: 'transparent' }}
-                        >
-                            ConnectWallet
-                        </Button> */}
-            <ConnectWeb3Wallet />
+          <Flex align="center" gap="10" my="1em">
+            <Button
+            onClick={() => ConnectToMetamask()}
+              border="1px solid #FDD835"
+              bg="#FBFAF7"
+              w="full"
+              fontSize={14}
+              rightIcon={<MetaMask />}
+              _hover={{ bg: "transparent" }}
+            >
+              MetaMask
+            </Button>
+
+            <Button
+              border="1px solid #FDD835"
+              bg="#FBFAF7"
+              w="full"
+              fontSize={14}
+              rightIcon={<ConnectWallet />}
+              _hover={{ bg: "transparent" }}
+            >
+              ConnectWallet
+            </Button>
           </Flex>
         </TabPanel>
         <TabPanel>

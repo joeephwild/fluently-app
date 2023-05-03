@@ -63,6 +63,8 @@ const SigninOption = () => {
               rightIcon={<ConnectWallet />}
               _hover={{ bg: "transparent" }}
             >
+              ConnectWallet
+            </Button>
               <ConnectWeb3Wallet
                 btnTitle="Get Started"
                 theme="light"

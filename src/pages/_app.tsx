@@ -1,7 +1,6 @@
 import "@/styles/globals.css";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
-import { useHuddle01 } from "@huddle01/react";
 import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -19,7 +18,9 @@ import {
   metamaskWallet,
   coinbaseWallet,
   walletConnect,
+  useAddress,
 } from "@thirdweb-dev/react";
+import { useRouter } from "next/router";
 
 export const theme = extendTheme({ colors });
 
@@ -27,11 +28,15 @@ export const theme = extendTheme({ colors });
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
-  const { initialize, isInitialized } = useHuddle01();
+  const address = useAddress();
+  const Router = useRouter();
 
   useEffect(() => {
-    initialize("KL1r3E1yHfcrRbXsT4mcE-3mK60Yc3YR");
-  }, [initialize]);
+    if (address) {
+      Router.push("/dasboard");
+    }
+  }, [address]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThirdwebProvider

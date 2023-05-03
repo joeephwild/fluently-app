@@ -24,7 +24,7 @@ const Setup : React.FC<Props> = ({ isOpen, onClose }) => {
                 {activeComponent === 'learn' && <Learn setActiveComponent={setActiveComponent} />}
                 {activeComponent === 'speak' && <Speak setActiveComponent={setActiveComponent} />}
                 {activeComponent === 'available' && <Availability setActiveComponent={setActiveComponent} />}
-                {activeComponent === 'complete' && <Complete onClose={onClose} />}
+                {activeComponent === 'complete' && <Complete setActiveComponent={setActiveComponent} onClose={onClose} />}
             </ModalContent>
         </Modal>
     )

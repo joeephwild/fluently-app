@@ -1,6 +1,6 @@
 import Layout from "@/components/layout/Layout";
 import Meta from "@/components/Meta";
-import { Box, Button, Center, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Flex, Image, Link, Text } from "@chakra-ui/react";
 import { FiArrowRight } from "react-icons/fi";
 
 const Welcome = () => {
@@ -19,7 +19,7 @@ const Welcome = () => {
                 <Text textAlign='center' fontWeight={400} color='#000'>
                     Ready to embark on a language adventure? With video calls and <br />interactive exercises, mastering a new language has never been <br />more fun. 
                 </Text>
-                <a href="/dashboard">
+                <Link href="/dashboard">
                     <Button
                         rightIcon={<FiArrowRight />}
                         mt='2em'
@@ -30,7 +30,7 @@ const Welcome = () => {
                     >
                         Proceed to Dashboard
                     </Button>
-                </a>
+                </Link>
             </Flex>
         </Flex>
     )
