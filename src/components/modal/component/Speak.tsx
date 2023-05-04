@@ -30,7 +30,7 @@ type Props = {
 
 const Speak: React.FC<Props> = ({ setActiveComponent }) => {
   const { native, setNative } = useFluentContext();
-  console.log(native)
+  console.log(native);
   return (
     <>
       <ModalBody m="2em" p="1em">
@@ -54,8 +54,13 @@ const Speak: React.FC<Props> = ({ setActiveComponent }) => {
               <option value="English">English</option>
               <option value="Spanish">Spanish</option>
               <option value="French">French</option>
-              <option value="Germany">Germany</option>
+              <option value="German">German</option>
               <option value="Korean">Korean</option>
+              <option value="Chinese">Chinese</option>
+              <option value="Estonian">Estonian</option>
+              <option value="Haitian Creole">Haitian Creole</option>
+              <option value="Japanese">Japanese</option>
+              <option value="Hindi">Hindi</option>
             </Select>
           </FormControl>
           <FormControl mt="1.25em">

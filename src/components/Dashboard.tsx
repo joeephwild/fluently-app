@@ -50,7 +50,7 @@ const Dashboard = ({ item }: Props) => {
           _hover={{ bg: "#fbdb4f" }}
           onClick={onOpen}
         >
-          Start Matching Now
+          Create Meeting session
         </Button>
 
         <Box mt="3em" bg="#FFFDF6" borderRadius={12} p="1em">

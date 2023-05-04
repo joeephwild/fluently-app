@@ -20,11 +20,30 @@ import {
   useMetamask,
   useAddress,
   ConnectWallet as ConnectWeb3Wallet,
+  useWalletConnect,
 } from "@thirdweb-dev/react";
+import { useRouter } from "next/router";
 
 const SigninOption = () => {
   const address = useAddress();
+  const router = useRouter();
+  const wallet = useWalletConnect();
+
+  function ConnectToWalletConnect() {
+    wallet();
+    if (address) {
+      router.push("/welcome");
+    }
+  }
+
   const connect = useMetamask();
+
+  function ConnectToMetamask() {
+    connect();
+    if (address) {
+      router.push("/welcome");
+    }
+  }
   return (
     <Tabs isFitted variant="unstyled">
       <TabList>
@@ -39,12 +58,13 @@ const SigninOption = () => {
         borderRadius="1px"
       />
       <TabPanels>
-        <TabPanel textAlign="center">
+        <TabPanel textAlign="left">
           <Text fontWeight={400} fontSize={14} ml={0}>
             Sign in by connecting with any of your wallets
           </Text>
-          <Flex align="center" gap="10" my="4em" justifyContent="center">
-            {/* <Button
+          <Flex align="center" gap="10" my="1em">
+            <Button
+              onClick={() => ConnectToMetamask()}
               border="1px solid #FDD835"
               bg="#FBFAF7"
               w="full"
@@ -56,6 +76,7 @@ const SigninOption = () => {
             </Button>
 
             <Button
+            onClick={() => ConnectToWalletConnect()}
               border="1px solid #FDD835"
               bg="#FBFAF7"
               w="full"
@@ -65,18 +86,11 @@ const SigninOption = () => {
             >
               ConnectWallet
             </Button>
-              <ConnectWeb3Wallet
-                btnTitle="Get Started"
-                theme="light"
-                className="my-custom-class"
-              />
-            </Button> */}
-            <ConnectWeb3Wallet />
           </Flex>
         </TabPanel>
         <TabPanel>
           <Text fontWeight={400} fontSize={14} ml={0}>
-            Sign in with Email address
+            Sign up with Email address
           </Text>
           <Input
             border="1px solid #FFF7D1"

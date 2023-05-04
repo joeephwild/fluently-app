@@ -19,18 +19,29 @@ import {
   useMetamask,
   useAddress,
   ConnectWallet as ConnectWeb3Wallet,
+  useWalletConnect,
 } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
 
 const SignupOption = () => {
-  const router = useRouter()
-  
+  const address = useAddress();
+  const router = useRouter();
+  const wallet = useWalletConnect();
+
+  function ConnectToWalletConnect() {
+    wallet();
+    if (address) {
+      router.push("/welcome");
+    }
+  }
+
   const connect = useMetamask();
 
-  function ConnectToMetamask  () {
+  function ConnectToMetamask() {
     connect();
-    router.push("/dashboard")
-    return connect
+    if (address) {
+      router.push("/welcome");
+    }
   }
   return (
     <Tabs isFitted variant="unstyled">
@@ -64,6 +75,7 @@ const SignupOption = () => {
             </Button>
 
             <Button
+            onClick={() => ConnectToWalletConnect()}
               border="1px solid #FDD835"
               bg="#FBFAF7"
               w="full"
