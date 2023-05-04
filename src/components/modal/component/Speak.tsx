@@ -16,11 +16,13 @@ import {
   Select,
   Text,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import {
   BsQuestionCircleFill,
   BsSearch,
   BsSearchHeartFill,
   BsStar,
+  BsStarFill,
 } from "react-icons/bs";
 import { FiArrowRight } from "react-icons/fi";
 
@@ -31,6 +33,9 @@ type Props = {
 const Speak: React.FC<Props> = ({ setActiveComponent }) => {
   const { native, setNative } = useFluentContext();
   console.log(native);
+  const [beginner, setBeginner] = useState(false);
+  const [intermediate, setIntermediate] = useState(false);
+  const [natives, setNatives] = useState(false);
   return (
     <>
       <ModalBody m="2em" p="1em">
@@ -68,10 +73,31 @@ const Speak: React.FC<Props> = ({ setActiveComponent }) => {
               Select your proficiency level
             </FormLabel>
             <Flex align="center" justifyContent="space-between">
-              <Flex gap={4}>
-                <BsStar />
-                <BsStar />
-                <BsStar />
+            <Flex gap={4} color="#FDD835">
+                <Box onClick={() => setBeginner((prev) => !prev)}>
+                  {beginner ? <BsStarFill size={24} /> : <BsStar size={24} />}
+                </Box>
+                <Box
+                  onClick={() => {
+                    setBeginner(true);
+                    !natives && setIntermediate((prev) => !prev);
+                  }}
+                >
+                  {intermediate ? (
+                    <BsStarFill size={24} />
+                  ) : (
+                    <BsStar size={24} />
+                  )}
+                </Box>
+                <Box
+                  onClick={() => {
+                    setBeginner(true);
+                    setIntermediate(true);
+                    setNatives((prev) => !prev);
+                  }}
+                >
+                  {natives ? <BsStarFill size={24} /> : <BsStar size={24} />}
+                </Box>
               </Flex>
               <BsQuestionCircleFill color="#FDD835" />
             </Flex>

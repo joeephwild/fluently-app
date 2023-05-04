@@ -125,7 +125,7 @@ export const FluentProvider = ({ children }: FluentProviderProps) => {
   const getUserMeeting = async () => {
     const meeting = await getAllMeeting();
     console.log(meeting);
-    const filterUserMeeting = meeting.filter(
+    const filterUserMeeting = meeting?.filter(
       (account: any) => account.user === address
     );
     console.log(filterUserMeeting);
