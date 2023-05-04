@@ -23,10 +23,13 @@ import {
   ConnectWallet as ConnectWeb3Wallet,
 } from "@thirdweb-dev/react";
 import truncateEthAddress from "truncate-eth-address";
+import { useFluentContext } from "@/context";
 
 const Dashboard = () => {
   const address = useAddress();
   const connect = useMetamask();
+  const { allMeeting } = useFluentContext()
+  //console.log(allMeeting)
 
   return (
     <Layout>
@@ -67,7 +70,7 @@ const Dashboard = () => {
         />
         <TabPanels>
           <TabPanel>
-            <DashboardPanel />
+            <DashboardPanel item={allMeeting} />
           </TabPanel>
         </TabPanels>
       </Tabs>

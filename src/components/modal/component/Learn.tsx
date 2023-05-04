@@ -1,28 +1,69 @@
-import { Box, Button, Flex, FormControl, FormLabel, Image, Menu, MenuButton, MenuItem, MenuList, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Text } from "@chakra-ui/react"
+import { useFluentContext } from "@/context";
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Image,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Select,
+  Text,
+  
+} from "@chakra-ui/react";
+import {
+  BsQuestionCircleFill,
+  BsSearch,
+  BsSearchHeartFill,
+  BsStar,
+  BsStarFill,
+} from "react-icons/bs";
 import { useState } from "react";
-import { BsQuestionCircleFill, BsSearch, BsSearchHeartFill, BsStarFill, BsStar } from "react-icons/bs";
 import { FiArrowRight } from "react-icons/fi";
 
 type Props = {
-    setActiveComponent: React.Dispatch<React.SetStateAction<string>>;
+  setActiveComponent: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const Learn: React.FC<Props> = ({ setActiveComponent }) => {
+  const { language, setLanguage } = useFluentContext();
+  console.log(language)
     const [beginner, setBeginner] = useState(false)
     const [intermediate, setIntermediate] = useState(false)
     const [native, setNative] = useState(false)
 
-    return (
-        <>
-            <ModalBody m='2em' p='1em'>
-                <Text fontWeight={700} fontSize='1.2em'>Set up languagues preferences</Text>
-                <Text fontSize='.8em' mt='.5em'>Please select the language you want to learn and your proficiency level in that language.</Text>
-                <Box>
-                    <FormControl mt='1em'>
-                        <FormLabel mb='.5em' fontSize='.9em'>Select language</FormLabel>
-                        <Select as={Button} leftIcon={<BsSearch />}>
-
-                        </Select>
+  return (
+    <>
+      <ModalBody m="2em" p="1em">
+        <Text fontWeight={700} fontSize="1.2em">
+          Set up languagues preferences
+        </Text>
+        <Text fontSize=".8em" mt=".5em">
+          Please select the language you want to learn and your proficiency
+          level in that language.
+        </Text>
+        <Box>
+          <FormControl mt="1em">
+            <FormLabel mb=".5em" fontSize=".9em">
+              Select language
+            </FormLabel>
+            <Select title="Select language" placeholder='Select option' onChange={(e) => setLanguage(e.target.value)}>
+              <option value="English">English</option>
+              <option value="Spanish">Spanish</option>
+              <option value="French">French</option>
+              <option value="Germany">Germany</option>
+              <option value="Korean">Korean</option>
+            </Select>
                     </FormControl>
                     <FormControl mt='1.25em'>
                         <FormLabel mb='.5em' fontSize='.9em'>Select your proficiency level</FormLabel>

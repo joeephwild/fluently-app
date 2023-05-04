@@ -7,8 +7,8 @@ import {
 } from "@huddle01/huddle01-iframe";
 import { useAddress } from "@thirdweb-dev/react";
 import { useEffect, useLayoutEffect, useState } from "react";
-import MeVideoElem from "@/components/MeVideoElem";
-import { Button } from "@chakra-ui/react";
+//import MeVideoElem from "@/components/MeVideoElem";
+//import { Button } from "@chakra-ui/react";
 
 const Loabby = () => {
   const huddleClient = getHuddleClient("gfhhf");
@@ -42,7 +42,7 @@ const Loabby = () => {
     noBorder: false, // false by default
   };
   return (
-    <div className="min-h-screenw-full">
+    <div >
       <div>
             <HuddleIframe config={iframeConfig} />
         </div>
