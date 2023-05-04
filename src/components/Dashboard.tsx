@@ -71,8 +71,8 @@ const Dashboard = ({ item }: Props) => {
                 {userMeetings.map((detail, i) => (
                   <Tr key={i}>
                     <Td>Thurs, 27th April, 4:00 PM</Td> {/* TODO: Use `detail.time` to render the actual date */}
-                    <Td>{detail.language}</Td>
                     <Td>{detail.native}</Td>
+                    <Td>{detail.language}</Td>
                     <Td>
                       <Flex gap={4}>
                         <Link href={detail.meeting}>
