@@ -69,6 +69,7 @@ const Availability: React.FC<Props> = ({ setActiveComponent }) => {
                 px="1em"
                 border="1px solid #FBCC00"
                 borderRadius={3}
+                cursor="pointer"
                 onClick={() => setTime(440)}
               >
                 04:00 PM
